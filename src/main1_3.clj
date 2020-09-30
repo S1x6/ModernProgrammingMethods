@@ -11,8 +11,11 @@
     ))
 
 (defn my-map
-  [f list]
-  (reduce (make-map-fun f) list)
+  [f coll]
+  (if (= 1 (count coll))
+    (list (f (first coll)))
+    (reduce (make-map-fun f) coll)
+    )
   )
 
 (defn make-filter-fun
@@ -33,8 +36,15 @@
   )
 
 (defn my-filter
-  [p? list]
-  (reduce (make-filter-fun p?) list))
+  [p? coll]
+  (if (= 1 (count coll))
+    (if (p? (first coll))
+      coll
+      `()
+      )
+    (reduce (make-filter-fun p?) coll)
+    )
+  )
 
 ;1.4
 (defn addOneToFirst
@@ -62,21 +72,24 @@
 
 (defn findCombinations
   [coll n]
-  (reduce (fn [f s] (do (println f) (println s) (println "===***===") (addAllToFirst s f))) (repeat n coll))
+  (reduce (fn [f s] (addAllToFirst s f)) (repeat n coll))
   )
 
 (defn -main
   []
   ;1.3
   ;map
-  ;(println (my-map (fn [a] (if (= (rem a 2) 0) `("lol") `("not lol"))) `(1 2 3 4 5)))
-  ;;filter
-  ;(println (my-filter (fn [a] (if (not= a 1) true false)) `(2 1 3 1 5)))
-  ;(println (my-filter (fn [a] (if (not= a 1) true false)) `(1 1 3 1 5)))
-  ;(println (my-filter (fn [a] (if (not= a 1) true false)) `(1 2 3 1 5)))
-  ;(println (my-filter (fn [a] (if (not= a 1) true false)) `(2 1 3 1 1)))
+  (println (my-map (fn [a] (if (= (rem a 2) 0) `("lol") `("not lol"))) `(1 2 3 4 5)))
+  ;filter
+  (println (my-filter (fn [a] (if (not= a 1) true false)) `(2 1 3 1 5)))
+  (println (my-filter (fn [a] (if (not= a 1) true false)) `(1 1 3 1 5)))
+  (println (my-filter (fn [a] (if (not= a 1) true false)) `(1 2 3 1 5)))
+  (println (my-filter (fn [a] (if (not= a 1) true false)) `(2 1 3 1 1)))
+  (println (my-filter (fn [a] (if (not= a 1) true false)) `(3)))
+
   ;1.4
   ;(println (addAllToFirst `("a" "b" "c") `("a" "b" "c")))
   ;(println (my-filter (fn [e] (not= e (str (first "abc")))) `("a" "b" "c")))
-  (println (findCombinations `("a" "b") 2))
+  ;(println (findCombinations `("a" "b") 2))
+  ;(println (findCombinations `("a" "b") 4))
   )
