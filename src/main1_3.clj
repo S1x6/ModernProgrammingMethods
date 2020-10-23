@@ -79,6 +79,7 @@
   []
   ;1.3
   ;map
+  (println "----------1.3----------")
   (println (my-map (fn [a] (if (= (rem a 2) 0) `("lol") `("not lol"))) `(1 2 3 4 5)))
   ;filter
   (println (my-filter (fn [a] (if (not= a 1) true false)) `(2 1 3 1 5)))
@@ -88,8 +89,9 @@
   (println (my-filter (fn [a] (if (not= a 1) true false)) `(3)))
 
   ;1.4
-  ;(println (addAllToFirst `("a" "b" "c") `("a" "b" "c")))
-  ;(println (my-filter (fn [e] (not= e (str (first "abc")))) `("a" "b" "c")))
-  ;(println (findCombinations `("a" "b") 2))
-  ;(println (findCombinations `("a" "b") 4))
+  (println "----------1.4----------")
+  (println (addAllToFirst `("a" "b" "c") `("a" "b" "c")))
+  (println (my-filter (fn [e] (not= e (str (first "abc")))) `("a" "b" "c")))
+  (println (findCombinations `("a" "b") 2))
+  (println (findCombinations `("a" "b" "c") 2))
   )
