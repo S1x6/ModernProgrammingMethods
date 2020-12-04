@@ -95,10 +95,22 @@
   ;  )
 
   ; 2.2 done
-  (let [f sq]
-    (println ((integral-seq f) 3))
-    (time ((integral-seq f) 100))                           ; занимает много времени (1000 вычислений)
-    (time ((integral-seq f) 101))                           ; занимает мало времени (10 вычислений)
-    (time ((integral-seq f) 1))                             ; занимает мало времени (0 вычислений)
-    )
+  ;(let [f sq]
+  ;  (println ((integral-seq f) 3))
+  ;  (time ((integral-seq f) 100))                           ; занимает много времени (1000 вычислений)
+  ;  (time ((integral-seq f) 101))                           ; занимает мало времени (10 вычислений)
+  ;  (time ((integral-seq f) 1))                             ; занимает мало времени (0 вычислений)
+  ;  )
+  (println)
+  (println (time ((integral-seq identity) 200)))
+  (println (time ((integral-seq identity) 201)))
+  (println (time ((integral-seq identity) 202)))
+  (println)
+  (println (time ((integral-seq identity) 2000)))
+  (println (time ((integral-seq identity) 2001)))
+  (println (time ((integral-seq identity) 2002)))
+  (println)
+  (println (time ((integral-seq identity) 30000)))          ;450 000 000
+  (println (time ((integral-seq identity) 30001)))
+  (println (time ((integral-seq identity) 30002)))
   )

@@ -43,7 +43,7 @@
 (defn my-filter
   [p? coll]
   (flatten (->>
-             (my-partition 1000 coll)
+             (my-partition 20 coll)
              (map #(future (my-old-filter p? %)))
              (doall)
              (map deref)
@@ -52,12 +52,15 @@
 
 (defn -main
   []
-  ;(println (my-partition 2 `(1 2 3 4 5 6 7)))
+  (println (my-partition 2 `(1 2 3 4 5 6 7)))
   ;(println (my-filter #(= (rem % 2) 0) (range 100)))
-  (time (my-filter #(= (rem % 2) 0) (range 1000000)))
-  (time (my-filter #(= (rem % 2) 0) (range 1000000)))
-  (time (my-filter #(= (rem % 2) 0) (range 1000000)))
-  (time (my-filter #(= (rem % 2) 0) (range 1000000)))
-  (time (my-filter #(= (rem % 2) 0) (range 1000000)))
-  (time (doall (filter #(= (rem % 2) 0) (range 1000000))))
+  ;(time (my-filter #(= (rem % 2) 0) (range 1000000)))
+  ;(time (my-filter #(= (rem % 2) 0) (range 1000000)))
+  ;(time (my-filter #(= (rem % 2) 0) (range 1000000)))
+  (println (my-filter #(= (rem % 2) 0) (range 10)))
+  ;(time (doall (filter #(do (Thread/sleep 10) (= (rem % 2) 0)) (range 1000))))
+  ;(time (my-filter #(do (Thread/sleep 10) (= (rem % 2) 0)) (range 1000)))
+  ;(time (doall (filter #(do (Thread/sleep 10) (= (rem % 2) 0)) (range 1000))))
+  ;(time (my-filter #(= (rem % 2) 0) (range 1000000)))
+  ;(time (doall (filter #(= (rem % 2) 0) (range 1000000))))
   )
